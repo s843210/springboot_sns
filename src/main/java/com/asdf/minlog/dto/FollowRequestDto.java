@@ -6,6 +6,6 @@ import lombok.*;
 @Setter
 @Builder
 public class FollowRequestDto {
-    @NonNull private Long followerId;
-    @NonNull private Long followeeId;
+  @NonNull private Long followerId;
+  @NonNull private Long followeeId;
 }
