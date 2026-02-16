@@ -27,13 +27,13 @@ public class ArticleController {
   @PostMapping
   @Operation(summary = "포스트 생성")
   @ApiResponses({
-    @ApiResponse(responseCode = "200", description = "성공"),
-    @ApiResponse(responseCode = "404", description = "사용자 없음 ")
+      @ApiResponse(responseCode = "200", description = "성공"),
+      @ApiResponse(responseCode = "404", description = "사용자 없음 ")
   })
   public ResponseEntity<ArticleResponseDto> createArticle(
-          @AuthenticationPrincipal MinilogUserDetails userDetails,
-          @RequestBody ArticleRequestDto article) {
-    Long userId = article.getAuthorId();
+      @AuthenticationPrincipal MinilogUserDetails userDetails,
+      @RequestBody ArticleRequestDto article) {
+    Long userId = userDetails.getId();
     ArticleResponseDto createdArticle = articleService.createArticle(article.getContent(), userId);
     return ResponseEntity.ok(createdArticle);
   }
@@ -41,8 +41,8 @@ public class ArticleController {
   @GetMapping("/{articleId}")
   @Operation(summary = "포스트 조회")
   @ApiResponses({
-    @ApiResponse(responseCode = "200", description = "성공"),
-    @ApiResponse(responseCode = "404", description = "포스트 없음")
+      @ApiResponse(responseCode = "200", description = "성공"),
+      @ApiResponse(responseCode = "404", description = "포스트 없음")
   })
   public ResponseEntity<ArticleResponseDto> getArticle(@PathVariable Long articleId) {
     var article = articleService.getArticleById(articleId);
@@ -52,11 +52,11 @@ public class ArticleController {
   @PutMapping("/{articleId}")
   @Operation(summary = "포스트 수정")
   @ApiResponses({
-    @ApiResponse(responseCode = "200", description = "성공"),
-    @ApiResponse(responseCode = "404", description = "포스트 없음")
+      @ApiResponse(responseCode = "200", description = "성공"),
+      @ApiResponse(responseCode = "404", description = "포스트 없음")
   })
   public ResponseEntity<ArticleResponseDto> updateArticle(
-          @AuthenticationPrincipal MinilogUserDetails userDetails,
+      @AuthenticationPrincipal MinilogUserDetails userDetails,
       @PathVariable Long articleId, @RequestBody ArticleRequestDto article) {
     var updatedArticle = articleService.updateArticle(userDetails.getId(), articleId, article.getContent());
     return ResponseEntity.ok(updatedArticle);
@@ -65,12 +65,12 @@ public class ArticleController {
   @DeleteMapping("/{articleId}")
   @Operation(summary = "포스트 삭제")
   @ApiResponses({
-    @ApiResponse(responseCode = "204", description = "삭제됨"),
-    @ApiResponse(responseCode = "404", description = "포스트 없음")
+      @ApiResponse(responseCode = "204", description = "삭제됨"),
+      @ApiResponse(responseCode = "404", description = "포스트 없음")
   })
   public ResponseEntity<Void> deleteArticle(
-          @AuthenticationPrincipal MinilogUserDetails userDetails,
-          @PathVariable Long articleId) {
+      @AuthenticationPrincipal MinilogUserDetails userDetails,
+      @PathVariable Long articleId) {
     articleService.deleteArticle(userDetails.getId(), articleId);
     return ResponseEntity.noContent().build();
   }
@@ -78,8 +78,8 @@ public class ArticleController {
   @GetMapping
   @Operation(summary = "유저의 게시글 조회")
   @ApiResponses({
-    @ApiResponse(responseCode = "200", description = "성공"),
-    @ApiResponse(responseCode = "404", description = "게시글 없음")
+      @ApiResponse(responseCode = "200", description = "성공"),
+      @ApiResponse(responseCode = "404", description = "게시글 없음")
   })
   public ResponseEntity<List<ArticleResponseDto>> getArticleByUserId(@RequestParam Long authorId) {
     var articleList = articleService.getArticleListByUserId(authorId);
