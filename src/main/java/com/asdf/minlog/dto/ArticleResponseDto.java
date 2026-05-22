@@ -12,6 +12,7 @@ import lombok.Setter;
 public class ArticleResponseDto {
   @NonNull private Long articleId;
   @NonNull private String content;
+  private String imageUrl;
   @NonNull private Long authorId;
   @NonNull private String authorName;
   @NonNull private LocalDateTime createdAt;

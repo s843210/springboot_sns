@@ -11,6 +11,7 @@ import lombok.Setter;
 @Builder
 public class ArticleRequestDto {
   @NonNull private String content;
+  private String imageUrl;
 
   @Deprecated(since = "2.0",forRemoval = true)
     @Schema(

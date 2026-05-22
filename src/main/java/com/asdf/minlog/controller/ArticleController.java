@@ -34,7 +34,8 @@ public class ArticleController {
       @AuthenticationPrincipal MinilogUserDetails userDetails,
       @RequestBody ArticleRequestDto article) {
     Long userId = userDetails.getId();
-    ArticleResponseDto createdArticle = articleService.createArticle(article.getContent(), userId);
+    ArticleResponseDto createdArticle =
+        articleService.createArticle(article.getContent(), userId, article.getImageUrl());
     return ResponseEntity.ok(createdArticle);
   }
 

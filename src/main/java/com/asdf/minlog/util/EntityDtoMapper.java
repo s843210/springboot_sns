@@ -12,6 +12,7 @@ public class EntityDtoMapper {
     return ArticleResponseDto.builder()
         .articleId(article.getId())
         .content(article.getContent())
+        .imageUrl(article.getImageUrl())
         .authorId(article.getAuthor().getId())
         .authorName(article.getAuthor().getUsername())
         .createdAt(article.getCreatedAt())

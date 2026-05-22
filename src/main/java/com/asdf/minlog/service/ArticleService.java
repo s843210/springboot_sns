@@ -28,7 +28,7 @@ public class ArticleService {
     this.userRepository = userRepository;
   }
 
-  public ArticleResponseDto createArticle(String content, Long userId) {
+  public ArticleResponseDto createArticle(String content, Long userId, String imageUrl) {
     User user =
         userRepository
             .findById(userId)
@@ -37,9 +37,9 @@ public class ArticleService {
                     new UserNotFoundException(
                         String.format("해당 아이디(%d)를 가진 사용자를 찾을 수 없습니다.", userId)));
 
-    Article aticle = Article.builder().content(content).author(user).build();
+    Article article = Article.builder().content(content).imageUrl(imageUrl).author(user).build();
 
-    Article savedArticle = articleRepository.save(aticle);
+    Article savedArticle = articleRepository.save(article);
     return EntityDtoMapper.toDto(savedArticle);
   }
 
