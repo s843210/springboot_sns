@@ -36,7 +36,7 @@ public class JwtUtil implements Serializable {
         if(token.startsWith("Bearer ")) {
             jwt = token.substring(7); //"Beaear 접두사 제거
         }else{
-            jwt = token; //"Beaear 접두사가 없는 경우
+            jwt = token; 
         }
 
         return getClaimFromToken(jwt,claims->claims.get("userId",Long.class));
